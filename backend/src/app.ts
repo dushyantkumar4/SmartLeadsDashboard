@@ -14,8 +14,6 @@ app.use(
       "http://localhost:5173",
       "https://smart-leads-dashboard-nu-eosin.vercel.app",
     ],
-
-    credentials: true,
   }),
 );
 

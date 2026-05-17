@@ -4,13 +4,11 @@ import authRoutes from "./models/auth/auth.routes.js";
 import leadRoutes from "./models/lead/lead.routes.js";
 import errorMiddleware from "./middlewares/error.middleware.js";
 const app = express();
-const allowedOrigins = [
-    "http://localhost:5173",
-    "https://your-frontend.vercel.app",
-];
 app.use(cors({
-    origin: allowedOrigins,
-    credentials: true,
+    origin: [
+        "http://localhost:5173",
+        "https://smart-leads-dashboard-nu-eosin.vercel.app",
+    ],
 }));
 app.use(express.json());
 app.use("/api", authRoutes);
