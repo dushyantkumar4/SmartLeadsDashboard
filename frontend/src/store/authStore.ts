@@ -168,7 +168,7 @@ export const useAuthStore =
         user: null,
         token: null,
       });
-
+      window.location.href = '/login'
       toast.success(
         "Logout successful"
       );
