@@ -60,9 +60,10 @@ const EditLead = () => {
       const res = await api.patch(`/${id}`, formData);
       toast.success(res.data.message);
       navigate("/dashboard");
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong");
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.message || "You are not allowed to do this",
+      );
     }
   };
 
