@@ -9,7 +9,7 @@ import errorMiddleware from "./middlewares/error.middleware.js";
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:5173",
+  "https://smart-leads-dashboard-nu-eosin.vercel.app",
   "https://smart-leads-dashboard-blush.vercel.app",
 ];
 
