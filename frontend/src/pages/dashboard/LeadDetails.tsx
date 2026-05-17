@@ -5,7 +5,7 @@ import {
   Link,
 } from "react-router-dom";
 
-import api from "../../api/axios";
+import api from "../../api/axios.ts";
 
 import type { Lead } from "../../types/lead.types.ts";
 
@@ -25,7 +25,7 @@ const LeadDetails = () => {
       setLoading(true);
 
       const res = await api.get(
-        `/lead/${id}`
+        `/${id}`
       );
 
       setLead(res.data.data);

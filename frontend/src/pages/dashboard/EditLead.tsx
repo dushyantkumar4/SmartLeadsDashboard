@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-import api from "../../api/axios";
+import api from "../../api/axios.ts";
 import { Link } from "react-router-dom";
 
-import Loader from "../../components/Loader";
+import Loader from "../../components/Loader.tsx";
 
 const EditLead = () => {
   const { id } = useParams();
@@ -24,7 +24,7 @@ const EditLead = () => {
     try {
       setLoading(true);
 
-      const res = await api.get(`/lead/${id}`);
+      const res = await api.get(`/${id}`);
       setFormData({
         name: res.data.data.name,
         email: res.data.data.email,
@@ -57,7 +57,7 @@ const EditLead = () => {
     e.preventDefault();
 
     try {
-      const res = await api.patch(`/lead/${id}`, formData);
+      const res = await api.patch(`/${id}`, formData);
       toast.success(res.data.message);
       navigate("/dashboard");
     } catch (error) {

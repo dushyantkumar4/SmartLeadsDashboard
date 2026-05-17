@@ -13,9 +13,9 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use("/auth", authRoutes);
+app.use("/api", authRoutes);
 
-app.use("/lead", leadRoutes);
+app.use("/api", leadRoutes);
 
 app.use(errorMiddleware);
 
