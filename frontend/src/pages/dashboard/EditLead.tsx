@@ -24,7 +24,7 @@ const EditLead = () => {
     try {
       setLoading(true);
 
-      const res = await api.get(`/${id}`);
+      const res = await api.get(`/lead/${id}`);
       setFormData({
         name: res.data.data.name,
         email: res.data.data.email,
@@ -57,7 +57,7 @@ const EditLead = () => {
     e.preventDefault();
 
     try {
-      const res = await api.patch(`/${id}`, formData);
+      const res = await api.patch(`/lead/${id}`, formData);
       toast.success(res.data.message);
       navigate("/dashboard");
     } catch (error) {

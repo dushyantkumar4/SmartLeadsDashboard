@@ -25,7 +25,7 @@ const LeadDetails = () => {
       setLoading(true);
 
       const res = await api.get(
-        `/${id}`
+        `/lead/${id}`
       );
 
       setLead(res.data.data);

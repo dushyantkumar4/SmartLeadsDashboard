@@ -48,7 +48,7 @@ export const useAuthStore =
       try {
         const res =
           await api.post<AuthResponse>(
-            "/login",
+            "/auth/login",
             {
               email,
               password,
@@ -105,7 +105,7 @@ export const useAuthStore =
       try {
         const res =
           await api.post<AuthResponse>(
-            "/register",
+            "/auth/register",
             {
               name,
               email,
