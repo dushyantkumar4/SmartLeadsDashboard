@@ -10,7 +10,7 @@ import Dashboard from "../pages/dashboard/Dashboard.tsx";
 import CreateLead from "../pages/dashboard/CreateLead.tsx";
 import EditLead from "../pages/dashboard/EditLead.tsx";
 import LeadDetails from "../pages/dashboard/LeadDetails.tsx";
-
+import LandingPage from "../pages/LandingPage.tsx";
 import ProtectedRoute from "../components/ProtectedRoute.tsx";
 
 const router = createBrowserRouter([
@@ -20,8 +20,8 @@ const router = createBrowserRouter([
     children: [
       {
         element: <AuthLayout />,
-
         children: [
+          { index: true, element: <LandingPage /> },
           {
             path: "register",
             element: <Register />,
