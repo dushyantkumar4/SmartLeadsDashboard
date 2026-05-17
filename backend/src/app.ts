@@ -10,7 +10,6 @@ const app = express();
 
 const allowedOrigins = [
   "https://smart-leads-dashboard-nu-eosin.vercel.app",
-  "https://smart-leads-dashboard-blush.vercel.app",
 ];
 
 app.use(
