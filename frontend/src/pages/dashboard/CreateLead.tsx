@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import { useLeadStore } from "../../store/leadStore.ts";
 
 const CreateLead = () => {
@@ -34,7 +34,15 @@ const CreateLead = () => {
 
   return (
     <div className="max-w-xl bg-white p-6 rounded-lg shadow place-self-center w-full">
-      <h1 className="text-2xl font-bold mb-5">Create Lead</h1>
+      <div className="flex justify-between items-center mb-1">
+        <h1 className="text-2xl font-bold">Create Lead</h1>
+        <Link
+          to="/dashboard"
+          className="inline-block mt-6 bg-black text-white px-5 py-2 rounded"
+        >
+          Back
+        </Link>
+      </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
@@ -49,6 +57,7 @@ const CreateLead = () => {
             value={formData.name}
             className="w-full border p-3 rounded"
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -64,6 +73,7 @@ const CreateLead = () => {
             value={formData.email}
             className="w-full border p-3 rounded"
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -78,10 +88,10 @@ const CreateLead = () => {
             className="w-full border p-3 rounded"
             onChange={handleChange}
           >
-            <option>New</option>
-            <option>Contacted</option>
-            <option>Qualified</option>
-            <option>Lost</option>
+            <option value="new">New</option>
+            <option value="contacted">Contacted</option>
+            <option value="qualified">Qualified</option>
+            <option value="lost">Lost</option>
           </select>
         </div>
 
@@ -96,9 +106,9 @@ const CreateLead = () => {
             className="w-full border p-3 rounded"
             onChange={handleChange}
           >
-            <option>Website</option>
-            <option>Instagram</option>
-            <option>Referral</option>
+            <option value="website">Website</option>
+            <option value="instagram">Instagram</option>
+            <option value="referral">Referral</option>
           </select>
         </div>
 

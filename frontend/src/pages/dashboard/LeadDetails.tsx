@@ -55,7 +55,8 @@ const LeadDetails = () => {
   }
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow max-w-2xl">
+    <div className="bg-white p-6 rounded-lg shadow max-w-2xl place-self-center w-full">
+
       <h1 className="text-3xl font-bold mb-6">
         Lead Details
       </h1>

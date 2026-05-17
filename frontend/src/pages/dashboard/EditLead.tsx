@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-
+import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-
 import api from "../../api/axios";
+import { Link } from "react-router-dom";
 
 import Loader from "../../components/Loader";
 
@@ -25,7 +25,6 @@ const EditLead = () => {
       setLoading(true);
 
       const res = await api.get(`/${id}`);
-
       setFormData(res.data.data);
 
       setLoading(false);
@@ -53,11 +52,13 @@ const EditLead = () => {
     e.preventDefault();
 
     try {
-      await api.patch(`/${id}`, formData);
-
+      const res = await api.patch(`/${id}`, formData);
+      console.log(formData);
+      toast.success(res.data.message);
       navigate("/dashboard");
     } catch (error) {
       console.log(error);
+      toast.error("Something went wrong");
     }
   };
 
@@ -66,8 +67,16 @@ const EditLead = () => {
   }
 
   return (
-    <div className="max-w-xl bg-white p-6 rounded-lg shadow">
-      <h1 className="text-2xl font-bold mb-5">Edit Lead</h1>
+    <div className="max-w-xl bg-white p-6 rounded-lg shadow place-self-center w-full">
+      <div className="flex justify-between items-center mb-1">
+        <h1 className="text-2xl font-bold ">Edit Lead</h1>
+        <Link
+          to="/dashboard"
+          className="inline-block mt-6 bg-black text-white px-5 py-2 rounded"
+        >
+          Back
+        </Link>
+      </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

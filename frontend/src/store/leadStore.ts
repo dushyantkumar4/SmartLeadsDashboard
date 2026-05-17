@@ -1,5 +1,5 @@
 import { create } from "zustand";
-
+import toast from "react-hot-toast";
 import api from "../api/axios.ts";
 
 import type { Lead, PaginationData } from "../types/lead.types.ts";
@@ -14,7 +14,7 @@ interface LeadState {
   getLeads: (page?: number) => Promise<void>;
 
   createLead: (data: Partial<Lead>) => Promise<void>;
-  
+
   deleteLead: (id: string) => Promise<void>;
 }
 
@@ -52,16 +52,19 @@ export const useLeadStore = create<LeadState>((set, get) => ({
   createLead: async (data) => {
     try {
       await api.post("/lead", data);
-
+      toast.success("Lead created successfully");
       get().getLeads();
     } catch (error) {
       console.log(error);
     }
   },
- 
+
   deleteLead: async (id) => {
     try {
       await api.delete(`/${id}`);
+       toast.success(
+      "Lead deleted"
+    );
 
       get().getLeads();
     } catch (error) {

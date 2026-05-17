@@ -1,29 +1,20 @@
 import { useEffect } from "react";
-
-import {
-  useLeadStore,
-} from "../../store/leadStore.ts";
+import { useNavigate } from "react-router-dom";
+import { useLeadStore } from "../../store/leadStore.ts";
 import Loader from "../../components/Loader.tsx";
 import EmptyState from "../../components/EmptyState.tsx";
 import LeadCard from "../../components/LeadCard.tsx";
 import Pagination from "../../components/Pagination.tsx";
 
 const Dashboard = () => {
-  const {
-    leads,
-    loading,
-    getLeads,
-    deleteLead,
-    pagination,
-  } = useLeadStore();
+  const { leads, loading, getLeads, deleteLead, pagination } = useLeadStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getLeads(1);
   }, []);
 
-  const handlePageChange = (
-    page: number
-  ) => {
+  const handlePageChange = (page: number) => {
     getLeads(page);
   };
 
@@ -34,9 +25,13 @@ const Dashboard = () => {
   return (
     <div>
       <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
-        <h1 className="text-3xl font-bold">
-          Leads Dashboard
-        </h1>
+        <h1 className="text-3xl font-bold">Leads Dashboard</h1>
+        <button
+          className="border px-4 py-1.5 rounded-lg"
+          onClick={() => navigate("/create")}
+        >
+          Create New Lead
+        </button>
       </div>
 
       {leads.length === 0 ? (
@@ -45,26 +40,14 @@ const Dashboard = () => {
         <>
           <div className="grid grid-cols-1  gap-4">
             {leads.map((lead) => (
-              <LeadCard
-                key={lead._id}
-                lead={lead}
-                onDelete={
-                  deleteLead
-                }
-              />
+              <LeadCard key={lead._id} lead={lead} onDelete={deleteLead} />
             ))}
           </div>
 
           <Pagination
-            currentPage={
-              pagination.page
-            }
-            totalPages={
-              pagination.totalPages
-            }
-            onPageChange={
-              handlePageChange
-            }
+            currentPage={pagination.page}
+            totalPages={pagination.totalPages}
+            onPageChange={handlePageChange}
           />
         </>
       )}
