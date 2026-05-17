@@ -1,17 +1,9 @@
-import type { Request, Response, NextFunction } from "express";
+import type {Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import type { JwtPayload } from "jsonwebtoken";
-
-interface CustomJwtPayload extends JwtPayload {
-  id: string;
-}
-
-export interface AuthRequest extends Request {
-  user?: CustomJwtPayload;
-}
+import type { CustomJwtPayload } from "../types/auth.types.js";
 
 export const protect = (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ): void => {

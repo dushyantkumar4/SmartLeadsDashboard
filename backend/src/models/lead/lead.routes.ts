@@ -7,7 +7,8 @@ import {
   getSingleLead,
   updateLead,
 } from "./lead.controller.js";
-
+import isLeadOwner from "../../middlewares/isOwner.js";
+import checkRole from "../../middlewares/roleBase.js";
 import { protect } from "../../middlewares/auth.middleware.js";
 import validate from "../../middlewares/validate.middleware.js";
 import {
@@ -19,12 +20,18 @@ const router = Router();
 
 router.post("/lead", protect, validate(createLeadValidation), createLead);
 
-router.get("/", protect, getLeads);
+router.get("/", protect, checkRole("admin"), getLeads);
 
-router.get("/:id", protect, getSingleLead);
+router.get("/:id", protect, isLeadOwner, getSingleLead);
 
-router.patch("/:id", protect, validate(updateLeadValidation), updateLead);
+router.patch(
+  "/:id",
+  protect,
+  isLeadOwner,
+  validate(updateLeadValidation),
+  updateLead,
+);
 
-router.delete("/:id", protect, deleteLead);
+router.delete("/:id", protect, isLeadOwner, deleteLead);
 
 export default router;

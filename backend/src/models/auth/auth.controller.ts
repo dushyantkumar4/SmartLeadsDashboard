@@ -25,7 +25,7 @@ export const registerUser = asyncHandler(
       role,
     });
 
-    const token = generateToken(user._id.toString());
+    const token = generateToken(user._id.toString(),user.role);
 
     res.status(201).json({
       success: true,
@@ -51,7 +51,7 @@ export const loginUser = asyncHandler(
       throw new ApiError(401, "Invalid credentials");
     }
 
-    const token = generateToken(user._id.toString());
+    const token = generateToken(user._id.toString(),user.role);
 
     res.status(200).json({
       success: true,

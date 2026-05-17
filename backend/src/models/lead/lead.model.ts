@@ -1,10 +1,11 @@
-import { Schema,model, Document } from "mongoose";
+import { Schema, model, Document,Types } from "mongoose";
 
 export interface ILead extends Document {
   name: string;
   email: string;
   status: "new" | "contacted" | "qualified" | "lost";
   source: "website" | "instagram" | "referral";
+  createdBy:Types.ObjectId
 }
 
 const leadSchema = new Schema<ILead>(
@@ -31,10 +32,15 @@ const leadSchema = new Schema<ILead>(
       enum: ["website", "instagram", "referral"],
       required: true,
     },
+    createdBy: {
+      type: Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const Lead = model<ILead>("Lead", leadSchema);

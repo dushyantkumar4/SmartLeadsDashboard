@@ -1,7 +1,5 @@
 import type { Request, Response } from "express";
-
 import Lead from "./lead.model.js";
-
 import asyncHandler from "../../utils/asyncHandler.js";
 
 import ApiError from "../../utils/ApiError.js";
@@ -10,6 +8,7 @@ import ApiError from "../../utils/ApiError.js";
 // CREATE LEAD
 export const createLead = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
+    
     const {
       name,
       email,
@@ -28,6 +27,7 @@ export const createLead = asyncHandler(
       email,
       status,
       source,
+      createdBy: req.user!.id,
     });
 
     res.status(201).json({
