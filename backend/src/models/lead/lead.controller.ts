@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import type { SortOrder } from "mongoose";
 import Lead from "./lead.model.js";
 import asyncHandler from "../../utils/asyncHandler.js";
 
@@ -87,7 +88,7 @@ export const getLeads = asyncHandler(
     }
 
     // SORT
-    const sortOption =
+    const sortOption: { createdAt: SortOrder } =
       sort === "oldest"
         ? { createdAt: 1 }
         : { createdAt: -1 };
