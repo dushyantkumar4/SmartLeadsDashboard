@@ -8,12 +8,15 @@ import errorMiddleware from "./middlewares/error.middleware.js";
 
 const app = express();
 
-const allowedOrigins = [
-  "https://smart-leads-dashboard-nu-eosin.vercel.app",
-];
-
 app.use(
-  cors(),
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://smart-leads-dashboard-nu-eosin.vercel.app",
+    ],
+
+    credentials: true,
+  }),
 );
 
 app.use(express.json());
