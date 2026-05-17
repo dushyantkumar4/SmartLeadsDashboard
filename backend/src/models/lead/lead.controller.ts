@@ -32,6 +32,7 @@ export const createLead = asyncHandler(
 
     res.status(201).json({
       success: true,
+      message:"lead created successfully",
       data: lead,
     });
   }

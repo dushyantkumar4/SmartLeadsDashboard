@@ -13,8 +13,8 @@ const LeadCard = ({
   onDelete,
 }: Props) => {
   return (
-    <div className="bg-white p-4 rounded-lg shadow">
-      <h2 className="text-xl font-bold">
+    <div className="bg-white p-3 rounded-lg shadow flex justify-around items-center">
+      <h2 className="font-medium">
         {lead.name}
       </h2>
 
@@ -34,7 +34,7 @@ const LeadCard = ({
         </span>
       </p>
 
-      <div className="flex gap-2 mt-4">
+      <div className="flex gap-2 items-center">
         <Link
           to={`/lead/${lead._id}`}
           className="bg-blue-500 text-white px-3 py-1 rounded"
@@ -43,7 +43,7 @@ const LeadCard = ({
         </Link>
 
         <Link
-          to={`/edit-lead/${lead._id}`}
+          to={`/edit/${lead._id}`}
           className="bg-yellow-500 text-white px-3 py-1 rounded"
         >
           Edit

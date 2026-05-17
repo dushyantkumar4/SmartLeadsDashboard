@@ -10,7 +10,7 @@ const Register = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [name, setName] = useState<string>("");
-  const [role, setRole] = useState<"admin" | "sales">("");
+  const [role, setRole] = useState<"admin" | "sales" | "">("");
 
   const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
@@ -18,7 +18,7 @@ const Register = () => {
     try {
       await register(name, email, password, role);
 
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
     }

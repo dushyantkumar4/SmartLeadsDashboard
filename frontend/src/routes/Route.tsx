@@ -48,12 +48,12 @@ const router = createBrowserRouter([
           },
 
           {
-            path: "create-lead",
+            path: "create",
             element: <CreateLead />,
           },
 
           {
-            path: "edit-lead/:id",
+            path: "edit/:id",
             element: <EditLead />,
           },
 

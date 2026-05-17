@@ -14,7 +14,7 @@ interface LeadState {
   getLeads: (page?: number) => Promise<void>;
 
   createLead: (data: Partial<Lead>) => Promise<void>;
-
+  
   deleteLead: (id: string) => Promise<void>;
 }
 
@@ -58,7 +58,7 @@ export const useLeadStore = create<LeadState>((set, get) => ({
       console.log(error);
     }
   },
-
+ 
   deleteLead: async (id) => {
     try {
       await api.delete(`/${id}`);

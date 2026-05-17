@@ -2,6 +2,7 @@ import { create } from "zustand";
 import api from "../api/axios";
 import type { AuthResponse } from "../types/auth.types.ts";
 
+
 interface AuthState {
   user: AuthResponse["user"] | null;
   token: string | null;
@@ -21,6 +22,7 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   token: localStorage.getItem("token"),
+  
 
   login: async (email, password) => {
     const res = await api.post<AuthResponse>("/login", {
@@ -59,5 +61,6 @@ export const useAuthStore = create<AuthState>((set) => ({
       user: null,
       token: null,
     });
+    window.location.href = "/login";
   },
 }));
