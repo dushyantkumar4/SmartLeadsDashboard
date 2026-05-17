@@ -1,8 +1,11 @@
-import "./App.css";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes/Route.tsx";
 
 const App = () => {
   return (
-    <div className="text-red-500">App</div>
+    <div>
+      <RouterProvider router={router} />
+    </div>
   )
 }
 

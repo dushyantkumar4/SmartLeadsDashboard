@@ -6,3 +6,9 @@ export interface Lead {
   source: string;
   createdAt: string;
 }
+
+export interface PaginationData {
+  total: number;
+  page: number;
+  totalPages: number;
+}

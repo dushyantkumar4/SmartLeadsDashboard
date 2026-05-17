@@ -1,48 +1,71 @@
 import { create } from "zustand";
-import api from "../api/axios";
-import type{ Lead } from "../types/lead.types.ts";
+
+import api from "../api/axios.ts";
+
+import type { Lead, PaginationData } from "../types/lead.types.ts";
 
 interface LeadState {
   leads: Lead[];
+
   loading: boolean;
 
-  getLeads: () => Promise<void>;
+  pagination: PaginationData;
 
-  createLead: (
-    data: Partial<Lead>
-  ) => Promise<void>;
+  getLeads: (page?: number) => Promise<void>;
 
-  deleteLead: (
-    id: string
-  ) => Promise<void>;
+  createLead: (data: Partial<Lead>) => Promise<void>;
+
+  deleteLead: (id: string) => Promise<void>;
 }
 
-export const useLeadStore = create<LeadState>(
-  (set, get) => ({
-    leads: [],
-    loading: false,
+export const useLeadStore = create<LeadState>((set, get) => ({
+  leads: [],
 
-    getLeads: async () => {
+  loading: false,
+
+  pagination: {
+    total: 0,
+    page: 1,
+    totalPages: 1,
+  },
+
+  getLeads: async (page = 1) => {
+    try {
       set({ loading: true });
 
-      const res = await api.get("/");
+      const res = await api.get(`/?page=${page}`);
 
       set({
         leads: res.data.data,
+
+        pagination: res.data.pagination,
+
         loading: false,
       });
-    },
+    } catch (error) {
+      set({ loading: false });
 
-    createLead: async (data) => {
+      console.log(error);
+    }
+  },
+
+  createLead: async (data) => {
+    try {
       await api.post("/lead", data);
 
       get().getLeads();
-    },
+    } catch (error) {
+      console.log(error);
+    }
+  },
 
-    deleteLead: async (id) => {
+  deleteLead: async (id) => {
+    try {
       await api.delete(`/${id}`);
 
       get().getLeads();
-    },
-  })
-);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+}));

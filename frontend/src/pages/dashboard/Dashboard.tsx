@@ -1,50 +1,77 @@
 import { useEffect } from "react";
-import { useLeadStore } from "../../store/leadStore";
+
+import {
+  useLeadStore,
+} from "../../store/leadStore";
+
+import Loader from "../../components/Loader.tsx";
+
+import EmptyState from "../../components/EmptyState.tsx";
+
+import LeadCard from "../../components/LeadCard.tsx";
+
+import Pagination from "../../components/Pagination.tsx";
 
 const Dashboard = () => {
   const {
     leads,
+    loading,
     getLeads,
     deleteLead,
+    pagination,
   } = useLeadStore();
 
   useEffect(() => {
-    getLeads();
+    getLeads(1);
   }, []);
 
+  const handlePageChange = (
+    page: number
+  ) => {
+    getLeads(page);
+  };
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold mb-5">
-        Leads
-      </h1>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {leads.map((lead) => (
-          <div
-            key={lead._id}
-            className="border rounded-lg p-4 shadow"
-          >
-            <h2 className="font-bold">
-              {lead.name}
-            </h2>
-
-            <p>{lead.email}</p>
-
-            <p>{lead.status}</p>
-
-            <p>{lead.source}</p>
-
-            <button
-              onClick={() =>
-                deleteLead(lead._id)
-              }
-              className="bg-red-500 text-white px-4 py-2 rounded mt-3"
-            >
-              Delete
-            </button>
-          </div>
-        ))}
+    <div>
+      <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
+        <h1 className="text-3xl font-bold">
+          Leads Dashboard
+        </h1>
       </div>
+
+      {leads.length === 0 ? (
+        <EmptyState message="No Leads Found" />
+      ) : (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {leads.map((lead) => (
+              <LeadCard
+                key={lead._id}
+                lead={lead}
+                onDelete={
+                  deleteLead
+                }
+              />
+            ))}
+          </div>
+
+          <Pagination
+            currentPage={
+              pagination.page
+            }
+            totalPages={
+              pagination.totalPages
+            }
+            onPageChange={
+              handlePageChange
+            }
+          />
+        </>
+      )}
     </div>
   );
 };
