@@ -16,10 +16,9 @@ import {
 } from "./lead.validation.js";
 
 const router = Router();
-
-router.post("/lead", protect, validate(createLeadValidation), createLead);
-
 router.get("/", protect, getLeads);
+
+router.post("/", protect, validate(createLeadValidation), createLead);
 
 router.get("/:id", protect, isLeadOwner, getSingleLead);
 

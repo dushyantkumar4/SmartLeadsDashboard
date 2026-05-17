@@ -51,7 +51,7 @@ export const useLeadStore = create<LeadState>((set, get) => ({
 
   createLead: async (data) => {
     try {
-      await api.post("/lead", data);
+      await api.post("/", data);
       toast.success("Lead created successfully");
       get().getLeads();
     } catch (error) {
@@ -62,10 +62,7 @@ export const useLeadStore = create<LeadState>((set, get) => ({
   deleteLead: async (id) => {
     try {
       await api.delete(`/${id}`);
-       toast.success(
-      "Lead deleted"
-    );
-
+      toast.success("Lead deleted successfully");
       get().getLeads();
     } catch (error) {
       console.log(error);

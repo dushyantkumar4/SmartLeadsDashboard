@@ -25,7 +25,12 @@ const EditLead = () => {
       setLoading(true);
 
       const res = await api.get(`/${id}`);
-      setFormData(res.data.data);
+      setFormData({
+        name: res.data.data.name,
+        email: res.data.data.email,
+        status: res.data.data.status,
+        source: res.data.data.source,
+      });
 
       setLoading(false);
     } catch (error) {
@@ -53,7 +58,6 @@ const EditLead = () => {
 
     try {
       const res = await api.patch(`/${id}`, formData);
-      console.log(formData);
       toast.success(res.data.message);
       navigate("/dashboard");
     } catch (error) {
