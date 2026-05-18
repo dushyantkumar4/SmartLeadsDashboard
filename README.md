@@ -88,7 +88,9 @@ A full-stack Lead Management Dashboard built using the MERN Stack.
 - POST - baseUrl/api
 
 ### Get all leads with pagination , search 
--GET - baseUrl/api?page=1
+- GET baseUrl/api   
+- by defauld it fetch all data but we can also provide the filter 
+- GET - baseUrl/api?page=1&status=qualified&source=instagram&search=rahul&sort=oldest
 
 ### Update Lead
 - PATCH - baseUrl/api/:id
