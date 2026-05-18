@@ -4,6 +4,8 @@
 
 ## Frontend Url => https://smart-leads-dashboard-nu-eosin.vercel.app
 
+## Postman public Collection => https://futisedev.postman.co/workspace/Public-work-space~afad00c3-c7a0-4a2e-a0bb-05082ed8b3bc/collection/40408902-51a4a55b-099f-4569-babe-aea5aa44f91a?action=share&creator=40408902
+
 A full-stack Lead Management Dashboard built using the MERN Stack.
 
 ## Tech Stack
