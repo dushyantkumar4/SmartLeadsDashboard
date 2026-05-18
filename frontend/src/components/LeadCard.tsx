@@ -20,45 +20,55 @@ const LeadCard = ({ lead, onDelete }: Props) => {
 
   const canManage = isOwner || isAdmin;
   return (
-    <div className="bg-white p-3 rounded-lg shadow flex justify-around items-center">
-      <h2 className="font-medium">{lead.name}</h2>
+    <div
+      className="bg-white
+  text-black
 
-      <p>{lead.email}</p>
+  dark:bg-zinc-800
+  dark:text-white p-3 rounded-lg shadow overflow-x-auto"
+    >
+      <div className="flex flex-col md:flex-row justify-between items-center gap-2 min-w-max">
+        <div className="flex items-center gap-10 whitespace-nowrap">
+          <h2 className="font-medium">{lead.name}</h2>
 
-      <p className="mt-2">
-        Status:
-        <span className="font-medium ml-1">{lead.status}</span>
-      </p>
+          <p>{lead.email}</p>
 
-      <p>
-        Source:
-        <span className="font-medium ml-1">{lead.source}</span>
-      </p>
+          <p>
+            Status:
+            <span className="font-medium ml-1">{lead.status}</span>
+          </p>
 
-      <div className="flex gap-2 items-center">
-        <button
-          onClick={() => navigate(`/lead/${lead._id}`)}
-          disabled={!canManage}
-          className="bg-blue-500 text-white px-3 py-1 rounded"
-        >
-          View
-        </button>
+          <p>
+            Source:
+            <span className="font-medium ml-1">{lead.source}</span>
+          </p>
+        </div>
 
-        <button
-          onClick={() => navigate(`/edit/${lead._id}`)}
-          disabled={!canManage}
-          className="bg-yellow-500 text-white px-3 py-1 rounded"
-        >
-          Edit
-        </button>
+        <div className="flex gap-2 items-center whitespace-nowrap">
+          <button
+            onClick={() => navigate(`/lead/${lead._id}`)}
+            disabled={!canManage}
+            className="bg-blue-500 text-white px-3 py-1 rounded"
+          >
+            View
+          </button>
 
-        <button
-          onClick={() => onDelete(lead._id)}
-          disabled={!canManage}
-          className="bg-red-500 text-white px-3 py-1 rounded"
-        >
-          Delete
-        </button>
+          <button
+            onClick={() => navigate(`/edit/${lead._id}`)}
+            disabled={!canManage}
+            className="bg-yellow-500 text-white px-3 py-1 rounded"
+          >
+            Edit
+          </button>
+
+          <button
+            onClick={() => onDelete(lead._id)}
+            disabled={!canManage}
+            className="bg-red-500 text-white px-3 py-1 rounded"
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -12,3 +12,34 @@ export interface PaginationData {
   page: number;
   totalPages: number;
 }
+
+interface Filters {
+  status?: string;
+
+  source?: string;
+
+  search?: string;
+
+  sort?: string;
+}
+
+export interface LeadState {
+  leads: Lead[];
+
+  loading: boolean;
+
+  pagination: PaginationData;
+
+  getLeads: (
+    page?: number,
+    filters?: Filters
+  ) => Promise<void>;
+
+  createLead: (
+    data: Partial<Lead>
+  ) => Promise<void>;
+
+  deleteLead: (
+    id: string
+  ) => Promise<void>;
+}

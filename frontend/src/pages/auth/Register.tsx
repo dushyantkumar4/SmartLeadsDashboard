@@ -28,7 +28,7 @@ const Register = () => {
     <div className="min-h-screen flex items-center justify-center px-4">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white shadow-md rounded-lg p-6"
+        className="w-full max-w-md bg-white dark:bg-black shadow-md rounded-lg p-6"
       >
         <h2 className="text-2xl font-bold mb-5">Register</h2>
 
@@ -88,12 +88,12 @@ const Register = () => {
             <option value="" disabled>
               Select Role
             </option>
-            <option value="admin">Admin</option>
-            <option value="sales">Sales</option>
+            <option value="admin" className="dark:text-white dark:bg-black">Admin</option>
+            <option value="sales" className="dark:text-white dark:bg-black">Sales</option>
           </select>
         </div>
 
-        <button className="w-full bg-black text-white p-3 rounded">
+        <button className="w-full bg-black text-white dark:bg-white dark:text-black p-3 rounded">
           Submit
         </button>
 

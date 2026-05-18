@@ -2,21 +2,7 @@ import { create } from "zustand";
 import toast from "react-hot-toast";
 import api from "../api/axios.ts";
 
-import type { Lead, PaginationData } from "../types/lead.types.ts";
-
-interface LeadState {
-  leads: Lead[];
-
-  loading: boolean;
-
-  pagination: PaginationData;
-
-  getLeads: (page?: number) => Promise<void>;
-
-  createLead: (data: Partial<Lead>) => Promise<void>;
-
-  deleteLead: (id: string) => Promise<void>;
-}
+import type {LeadState } from "../types/lead.types.ts";
 
 export const useLeadStore = create<LeadState>((set, get) => ({
   leads: [],
@@ -29,11 +15,31 @@ export const useLeadStore = create<LeadState>((set, get) => ({
     totalPages: 1,
   },
 
-  getLeads: async (page = 1) => {
+  getLeads: async (page = 1, filters = {}) => {
     try {
       set({ loading: true });
 
-      const res = await api.get(`/?page=${page}`);
+      const query = new URLSearchParams({
+        page: String(page),
+
+        ...(filters.status && {
+          status: filters.status,
+        }),
+
+        ...(filters.source && {
+          source: filters.source,
+        }),
+
+        ...(filters.search && {
+          search: filters.search,
+        }),
+
+        ...(filters.sort && {
+          sort: filters.sort,
+        }),
+      });
+
+      const res = await api.get(`/?${query.toString()}`);
 
       set({
         leads: res.data.data,

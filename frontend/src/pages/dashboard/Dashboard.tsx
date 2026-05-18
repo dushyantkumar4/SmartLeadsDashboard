@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLeadStore } from "../../store/leadStore.ts";
 import Loader from "../../components/Loader.tsx";
@@ -9,13 +9,35 @@ import Pagination from "../../components/Pagination.tsx";
 const Dashboard = () => {
   const { leads, loading, getLeads, deleteLead, pagination } = useLeadStore();
   const navigate = useNavigate();
+  const [status, setStatus] = useState<string>("");
+
+  const [source, setSource] = useState<string>("");
+
+  const [search, setSearch] = useState<string>("");
+
+  const [sort, setSort] = useState<string>("latest");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
 
   useEffect(() => {
-    getLeads(1);
-  }, []);
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [search]);
+
+  useEffect(() => {
+    getLeads(currentPage, {
+      status,
+      source,
+      search: debouncedSearch,
+      sort,
+    });
+  }, [currentPage, status, source, debouncedSearch, sort]);
 
   const handlePageChange = (page: number) => {
-    getLeads(page);
+    setCurrentPage(page);
   };
 
   if (loading) {
@@ -32,6 +54,56 @@ const Dashboard = () => {
         >
           Create New Lead
         </button>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="border p-3 rounded"
+        />
+
+        <select className="dark:text-white dark:bg-black"
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          className="border p-3 rounded"
+        >
+          <option value=""className="dark:text-white dark:bg-black">All Status</option>
+
+          <option value="new"className="dark:text-white dark:bg-black">New</option>
+
+          <option value="contacted"className="dark:text-white dark:bg-black">Contacted</option>
+
+          <option value="qualified"className="dark:text-white dark:bg-black">Qualified</option>
+
+          <option value="lost"className="dark:text-white dark:bg-black">Lost</option>
+        </select>
+
+        <select
+          value={source}
+          onChange={(e) => setSource(e.target.value)}
+          className="border p-3 rounded"
+        >
+          <option value="" className="dark:text-white dark:bg-black">All Sources</option>
+
+          <option value="website" className="dark:text-white dark:bg-black">Website</option>
+
+          <option value="instagram" className="dark:text-white dark:bg-black">Instagram</option>
+
+          <option value="referral" className="dark:text-white dark:bg-black">Referral</option>
+        </select>
+
+        <select
+          value={sort}
+          onChange={(e) => setSort(e.target.value)}
+          className="border p-3 rounded"
+        >
+          <option value="latest" className="dark:text-white dark:bg-black">Latest</option>
+
+          <option value="oldest" className="dark:text-white dark:bg-black">Oldest</option>
+        </select>
       </div>
 
       {leads.length === 0 ? (

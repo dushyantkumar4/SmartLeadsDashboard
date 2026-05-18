@@ -55,14 +55,14 @@ const LeadDetails = () => {
   }
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow max-w-2xl place-self-center w-full">
+    <div className="bg-white dark:bg-black p-6 rounded-lg shadow max-w-2xl place-self-center w-full">
 
       <h1 className="text-3xl font-bold mb-6">
         Lead Details
       </h1>
 
       <div className="space-y-4">
-        <div>
+        <div className="border rounded-lg py-2 px-5">
           <p className="font-semibold">
             Name
           </p>
@@ -70,7 +70,7 @@ const LeadDetails = () => {
           <p>{lead.name}</p>
         </div>
 
-        <div>
+        <div className="border rounded-lg py-2 px-5">
           <p className="font-semibold">
             Email
           </p>
@@ -78,7 +78,7 @@ const LeadDetails = () => {
           <p>{lead.email}</p>
         </div>
 
-        <div>
+        <div className="border rounded-lg py-2 px-5">
           <p className="font-semibold">
             Status
           </p>
@@ -86,7 +86,7 @@ const LeadDetails = () => {
           <p>{lead.status}</p>
         </div>
 
-        <div>
+        <div className="border rounded-lg py-2 px-5">
           <p className="font-semibold">
             Source
           </p>
@@ -94,7 +94,7 @@ const LeadDetails = () => {
           <p>{lead.source}</p>
         </div>
 
-        <div>
+        <div className="border rounded-lg py-2 px-5">
           <p className="font-semibold">
             Created At
           </p>
@@ -109,7 +109,7 @@ const LeadDetails = () => {
 
       <Link
         to="/dashboard"
-        className="inline-block mt-6 bg-black text-white px-5 py-2 rounded"
+        className="inline-block mt-6 bg-black text-white dark:bg-white dark:text-black px-5 py-2 rounded"
       >
         Back
       </Link>
