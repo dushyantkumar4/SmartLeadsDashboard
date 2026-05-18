@@ -81,24 +81,31 @@ A full-stack Lead Management Dashboard built using the MERN Stack.
 ## auth endpoints
 
 ### Signup
+
 - POST- baseUrl/api/register
 
 ### Login
+
 - POST - baseUrl/api/login
 
 ### Create Lead
+
 - POST - baseUrl/api
 
-### Get all leads with pagination , search 
-- GET baseUrl/api   
-- by defauld it fetch all data but we can also provide the filter 
+### Get all leads with pagination , search
+
+- GET baseUrl/api
+- by defauld it fetch all data but we can also provide the filter
 - GET - baseUrl/api?page=1&status=qualified&source=instagram&search=rahul&sort=oldest
 
 ### Update Lead
+
 - PATCH - baseUrl/api/:id
 
-### Delete Lead 
+### Delete Lead
+
 - DELETE - baseUrl/api/:id
 
-### Get single Lead in details 
+### Get single Lead in details
+
 - GET - baseUrl/api/:id

@@ -65,7 +65,7 @@ const Dashboard = () => {
           className="border p-3 rounded"
         />
 
-        <select className="dark:text-white dark:bg-black"
+        <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
           className="border p-3 rounded"
